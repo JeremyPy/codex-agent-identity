@@ -603,46 +603,6 @@ a.btn {
   font-size: 0.9rem;
 }
 
-/* Community */
-.community-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.1rem;
-  align-items: start;
-}
-
-@media (min-width: 640px) {
-  .community-grid {
-    grid-template-columns: 1fr auto;
-  }
-}
-
-.community-list {
-  margin-top: 0.55rem;
-}
-
-.community-qr {
-  margin: 0;
-  text-align: center;
-  justify-self: center;
-}
-
-.community-qr img {
-  display: block;
-  width: 200px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #111;
-}
-
-.community-qr figcaption {
-  margin-top: 0.45rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
 .footer {
   margin-top: 1.75rem;
   display: flex;

@@ -13,14 +13,6 @@
 - **正式域名**：https://codex.lucoo.net/
 - **GitHub Pages 备用**：https://jeremypy.github.io/codex-agent-identity/
 - **仓库**：https://github.com/JeremyPy/codex-agent-identity
-- **博客 / 更多教程**：https://lucoo.net/
-
-## 社区
-
-- **QQ 群**：`1081378039`（Lucoo 人工智能交流群）
-- **入群二维码**：见下方图片，或打开站点页脚「社区」区域扫码
-
-![QQ 群二维码 1081378039](./assets/qq-group-qr.png)
 
 本地预览：
 
@@ -122,3 +114,9 @@ codex-agent-identity/
 ## License
 
 MIT
+
+---
+
+更多教程见 [lucoo.net](https://lucoo.net/)。交流 QQ 群：`1081378039`。
+
+![QQ 群](./assets/qq-group-qr.png)

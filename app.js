@@ -704,12 +704,6 @@ els.input.addEventListener("input", () => {
   }
 });
 
-$("btnCopyQq")?.addEventListener("click", async () => {
-  const qq = $("qqGroup")?.textContent?.trim() || "1081378039";
-  const ok = await copyText(qq);
-  setStatus(ok ? "ok" : "error", ok ? `已复制 QQ 群号 ${qq}` : "复制失败，请手动复制 1081378039");
-});
-
 // Soft warning when not secure context (Web Crypto needs it except localhost)
 if (!globalThis.isSecureContext) {
   setStatus(
