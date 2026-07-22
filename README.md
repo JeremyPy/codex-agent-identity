@@ -36,12 +36,11 @@ python3 -m http.server 8787
 1. **登录** — 浏览器打开 [chatgpt.com](https://chatgpt.com) 并登录  
 2. **复制 Session** — 打开 `https://chatgpt.com/api/auth/session`，复制整页 JSON  
 3. **生成** — 粘贴到网页输入框（自动格式化）→ 点「生成 auth.json」→ 下载  
-4. **Cockpit 导入**  
+4. **Cockpit 导入到 API 服务**  
    1. [下载 Cockpit](https://github.com/jlcodes99/cockpit-tools/releases)  
-   2. 添加 Codex 账号 → **导入**  
-   3. **从本地文件导入** 刚下载的 `auth.json`  
-   4. 确认后 **不检测，直接导入** → **刷新**  
-   5. 点 **开始** 进入 Codex  
+   2. 添加 Codex 账号 → **导入** → **从本地文件导入** `auth.json`  
+   3. 点绿色 **「直接导入并添加到 API 服务」**  
+   4. 在 **API 服务** 卡片点 **开始**（播放按钮）  
 
 ## 输入格式
 

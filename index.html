@@ -148,8 +148,8 @@
       <header class="step-head">
         <div class="step-num">4</div>
         <div>
-          <h2>用 Cockpit 导入并启动 Codex</h2>
-          <p>下载 Cockpit → 导入刚生成的 <code>auth.json</code> → 刷新 → 一键进入 Codex。</p>
+          <h2>用 Cockpit 导入到 API 服务并启动</h2>
+          <p>下载 Cockpit → 导入 <code>auth.json</code> 到 <strong>API 服务</strong> → 点开始。</p>
         </div>
       </header>
       <div class="step-body">
@@ -173,52 +173,44 @@
           <li class="cockpit-step">
             <div class="cockpit-step-title">
               <span class="mini-num">2</span>
-              <strong>点击「导入」Codex 账号</strong>
+              <strong>点击「导入」→ 从本地文件导入 auth.json</strong>
             </div>
-            <p class="step-tip">在「添加 Codex 账号」弹窗中，选择顶部的 <strong>导入</strong> 标签页。</p>
+            <p class="step-tip">添加 Codex 账号 → 顶部选 <strong>导入</strong> → <strong>从本地文件导入</strong>，选择第 3 步下载的 <code>auth.json</code>。</p>
             <figure class="shot">
-              <img src="./assets/cockpit-import-file.png" alt="Cockpit 导入标签与从本地文件导入" loading="lazy" />
-              <figcaption>选中「导入」→ 下方会出现「从本地文件导入」</figcaption>
+              <img src="./assets/cockpit-import-file.png" alt="Cockpit 从本地文件导入" loading="lazy" />
+              <figcaption>选中「导入」→「从本地文件导入」</figcaption>
             </figure>
           </li>
 
           <li class="cockpit-step">
             <div class="cockpit-step-title">
               <span class="mini-num">3</span>
-              <strong>从本地文件导入 auth.json</strong>
+              <strong>直接导入并添加到 API 服务</strong>
             </div>
-            <p class="step-tip">点击 <strong>从本地文件导入</strong>，选择第 3 步下载的 <code>auth.json</code>。解析成功后会显示 Agent Identity 账号，再点 <strong>不检测，直接导入</strong>。</p>
+            <p class="step-tip">解析成功后确认是 Agent Identity。请点绿色按钮 <strong>「直接导入并添加到 API 服务」</strong>（推荐），把账号写入 API 服务号池；不要只点「不检测，直接导入」。</p>
             <figure class="shot">
-              <img src="./assets/cockpit-batch-import.png" alt="Codex 批量导入确认" loading="lazy" />
-              <figcaption>确认账号为「可导入 / Agent Identity」后，点击「不检测，直接导入」</figcaption>
+              <img src="./assets/cockpit-import-api.jpg" alt="直接导入并添加到 API 服务" loading="lazy" />
+              <figcaption>红色框：直接导入并添加到 API 服务</figcaption>
             </figure>
           </li>
 
           <li class="cockpit-step">
             <div class="cockpit-step-title">
               <span class="mini-num">4</span>
-              <strong>导入完成 → 刷新</strong>
+              <strong>在 API 服务卡片点击「开始」</strong>
             </div>
-            <p class="step-tip">导入成功后，在账号卡片底部工具栏点击 <strong>刷新</strong>（圆形箭头图标），拉取额度与订阅状态。</p>
+            <p class="step-tip">切换到 <strong>API 服务</strong> 卡片，确认账号池可用后，点底部工具栏的 <strong>播放 / 开始</strong> 按钮启动服务。</p>
             <figure class="shot">
-              <img src="./assets/cockpit-refresh-start.png" alt="账号卡片刷新与启动按钮" loading="lazy" />
-              <figcaption>红色框：刷新；旁边的播放按钮：开始 / 进入 Codex</figcaption>
+              <img src="./assets/cockpit-api-start.png" alt="API 服务点击开始" loading="lazy" />
+              <figcaption>红色框：API 服务的开始按钮</figcaption>
             </figure>
-          </li>
-
-          <li class="cockpit-step">
-            <div class="cockpit-step-title">
-              <span class="mini-num">5</span>
-              <strong>点击「开始」直接进入 Codex</strong>
-            </div>
-            <p class="step-tip">刷新完成后，点击工具栏中的 <strong>播放 / 开始</strong> 按钮，即可用该 Agent Identity 账号直接启动 Codex，无需再浏览器 OAuth / 接码。</p>
           </li>
         </ol>
 
         <ul class="step-list">
           <li><code>auth.json</code> 含私钥，请勿上传到公开仓库或发给陌生人。</li>
+          <li>若提示「已存在」，可先删掉旧账号再导入，或直接用已有账号点 API 服务开始。</li>
           <li>若导入失败，确认文件是本页生成的 <code>auth_mode: agent_identity</code> 格式，且 Cockpit 版本支持 Agent Identity。</li>
-          <li>仍可用传统方式：手动把文件放到 <code>~/.codex/auth.json</code> 后运行 <code>codex</code>。</li>
         </ul>
       </div>
     </section>
