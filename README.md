@@ -1,5 +1,7 @@
 # Codex Agent Identity · 无需手机号登录 Codex
 
+**中文** | [English](./README_EN.md)
+
 **无需手机号登录 Codex · 无需验证码 · 免短信 · 跳过手机验证 · 免接码登录 Codex CLI / Cockpit**
 
 在浏览器里把已登录的 ChatGPT **Session / accessToken** 转成 Codex 可用的 **`auth.json`（agent_identity）**，再导入 **Cockpit** 一键启动 Codex。  
@@ -116,7 +118,8 @@ codex-agent-identity/
 ├── app.js
 ├── assets/          # Cockpit 操作截图
 ├── LICENSE
-└── README.md
+├── README.md        # 中文
+└── README_EN.md     # English
 ```
 
 ## License
