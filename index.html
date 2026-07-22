@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Browser-only Codex Agent Identity generator. Session never leaves your device except for OpenAI agent registration." />
+  <title>Codex Agent Identity · 按步骤生成 auth.json</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-mark">◇</span>
+        <div>
+          <h1>Codex Agent Identity</h1>
+          <p class="tagline">按步骤生成 · 纯前端 · 导入 Cockpit · 启动 Codex</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge ok">No server</span>
+        <span class="badge">Ed25519</span>
+        <a class="badge link-badge" id="siteBadge" href="https://codex.lucoo.net/" target="_blank" rel="noopener">codex.lucoo.net</a>
+        <a class="badge link-badge" id="githubBadge" href="https://github.com/JeremyPy/codex-agent-identity" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </header>
+
+    <nav class="step-nav" aria-label="步骤进度">
+      <div class="step-nav-item" data-step-nav="1"><span>1</span>登录</div>
+      <div class="step-nav-item" data-step-nav="2"><span>2</span>复制 Session</div>
+      <div class="step-nav-item" data-step-nav="3"><span>3</span>生成</div>
+      <div class="step-nav-item" data-step-nav="4"><span>4</span>Cockpit</div>
+    </nav>
+
+    <section class="notice compact">
+      <strong>安全</strong>
+      密钥在本机浏览器生成；仅请求 <code>auth.openai.com</code>。
+      <code>accessToken</code> 等同密码，勿发到公开渠道。仅限自有账号，请遵守 OpenAI 服务条款。
+    </section>
+
+    <!-- Step 1 -->
+    <section class="step-card" id="step1" data-step="1">
+      <header class="step-head">
+        <div class="step-num">1</div>
+        <div>
+          <h2>登录 ChatGPT</h2>
+          <p>在浏览器中登录你的 ChatGPT 账号（保持登录状态）。</p>
+        </div>
+      </header>
+      <div class="step-body">
+        <a class="btn primary" href="https://chatgpt.com" target="_blank" rel="noopener">打开 chatgpt.com 登录</a>
+        <p class="step-tip">已登录可直接进入下一步。</p>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step-card" id="step2" data-step="2">
+      <header class="step-head">
+        <div class="step-num">2</div>
+        <div>
+          <h2>复制 Session JSON</h2>
+          <p>打开下面链接，复制<strong>整页 JSON</strong>（或只复制 <code>accessToken</code> 字段）。</p>
+        </div>
+      </header>
+      <div class="step-body">
+        <div class="link-row">
+          <code class="link-box" id="sessionUrl">https://chatgpt.com/api/auth/session</code>
+          <button type="button" class="btn" id="btnCopySessionUrl">复制链接</button>
+          <a class="btn primary" href="https://chatgpt.com/api/auth/session" target="_blank" rel="noopener">打开 Session 页</a>
+        </div>
+        <ul class="step-list">
+          <li>必须在<strong>已登录</strong>的同一浏览器里打开该链接。</li>
+          <li>页面应显示一长段以 <code>{</code> 开头的 JSON；全选复制即可。</li>
+          <li>若复制时带上了其它页面文字（如支付工具 UI），粘贴后会<strong>自动清理并格式化</strong>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step-card" id="step3" data-step="3">
+      <header class="step-head">
+        <div class="step-num">3</div>
+        <div>
+          <h2>粘贴并生成 auth.json</h2>
+          <p>把上一步复制的内容粘贴到下方，点击生成。密钥在本地生成，token 只发给 OpenAI 注册 agent。</p>
+        </div>
+      </header>
+      <div class="step-body">
+        <label class="field-label" for="input">
+          粘贴 Session / Access Token
+          <span class="hint">粘贴后自动格式化</span>
+        </label>
+        <textarea
+          id="input"
+          spellcheck="false"
+          placeholder="在此粘贴第 2 步复制的整页 JSON，或纯 accessToken（eyJ…）"
+          rows="12"
+        ></textarea>
+
+        <div class="row options">
+          <label class="check">
+            <input type="checkbox" id="verifyTask" checked />
+            注册后验证 task（可选，失败不影响 auth.json）
+          </label>
+          <label class="field-inline">
+            输出文件名
+            <input type="text" id="filename" value="auth.json" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="btnGenerate" class="btn primary">生成 auth.json</button>
+          <button type="button" id="btnClear" class="btn ghost">清空</button>
+        </div>
+
+        <div id="status" class="status" hidden></div>
+
+        <section id="result" class="result" hidden>
+          <div class="result-head">
+            <h3>生成结果</h3>
+            <div class="actions tight">
+              <button type="button" id="btnCopy" class="btn">复制 JSON</button>
+              <button type="button" id="btnDownload" class="btn primary">下载 auth.json</button>
+            </div>
+          </div>
+          <dl class="meta" id="meta"></dl>
+          <pre id="output" class="code"></pre>
+          <p class="step-tip ok-tip">生成成功后，请下载文件，继续<strong>第 4 步</strong>用 Cockpit 导入并启动 Codex。</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- Step 4: Cockpit -->
+    <section class="step-card" id="step4" data-step="4">
+      <header class="step-head">
+        <div class="step-num">4</div>
+        <div>
+          <h2>用 Cockpit 导入并启动 Codex</h2>
+          <p>下载 Cockpit → 导入刚生成的 <code>auth.json</code> → 刷新 → 一键进入 Codex。</p>
+        </div>
+      </header>
+      <div class="step-body">
+        <ol class="cockpit-steps">
+          <li class="cockpit-step">
+            <div class="cockpit-step-title">
+              <span class="mini-num">1</span>
+              <strong>下载并安装 Cockpit</strong>
+            </div>
+            <p class="step-tip">打开 Releases 页，按系统下载安装（macOS 一般选 <code>.dmg</code>，Windows 选 <code>.msi</code>）。</p>
+            <div class="actions" style="margin-top:0.65rem">
+              <a class="btn primary" href="https://github.com/jlcodes99/cockpit-tools/releases" target="_blank" rel="noopener">下载 Cockpit</a>
+              <a class="btn" href="https://github.com/jlcodes99/cockpit-tools" target="_blank" rel="noopener">项目主页</a>
+            </div>
+            <figure class="shot">
+              <img src="./assets/cockpit-home.png" alt="Cockpit 首页" loading="lazy" />
+              <figcaption>安装后打开 Cockpit，进入 Codex 相关模块</figcaption>
+            </figure>
+          </li>
+
+          <li class="cockpit-step">
+            <div class="cockpit-step-title">
+              <span class="mini-num">2</span>
+              <strong>点击「导入」Codex 账号</strong>
+            </div>
+            <p class="step-tip">在「添加 Codex 账号」弹窗中，选择顶部的 <strong>导入</strong> 标签页。</p>
+            <figure class="shot">
+              <img src="./assets/cockpit-import-file.png" alt="Cockpit 导入标签与从本地文件导入" loading="lazy" />
+              <figcaption>选中「导入」→ 下方会出现「从本地文件导入」</figcaption>
+            </figure>
+          </li>
+
+          <li class="cockpit-step">
+            <div class="cockpit-step-title">
+              <span class="mini-num">3</span>
+              <strong>从本地文件导入 auth.json</strong>
+            </div>
+            <p class="step-tip">点击 <strong>从本地文件导入</strong>，选择第 3 步下载的 <code>auth.json</code>。解析成功后会显示 Agent Identity 账号，再点 <strong>不检测，直接导入</strong>。</p>
+            <figure class="shot">
+              <img src="./assets/cockpit-batch-import.png" alt="Codex 批量导入确认" loading="lazy" />
+              <figcaption>确认账号为「可导入 / Agent Identity」后，点击「不检测，直接导入」</figcaption>
+            </figure>
+          </li>
+
+          <li class="cockpit-step">
+            <div class="cockpit-step-title">
+              <span class="mini-num">4</span>
+              <strong>导入完成 → 刷新</strong>
+            </div>
+            <p class="step-tip">导入成功后，在账号卡片底部工具栏点击 <strong>刷新</strong>（圆形箭头图标），拉取额度与订阅状态。</p>
+            <figure class="shot">
+              <img src="./assets/cockpit-refresh-start.png" alt="账号卡片刷新与启动按钮" loading="lazy" />
+              <figcaption>红色框：刷新；旁边的播放按钮：开始 / 进入 Codex</figcaption>
+            </figure>
+          </li>
+
+          <li class="cockpit-step">
+            <div class="cockpit-step-title">
+              <span class="mini-num">5</span>
+              <strong>点击「开始」直接进入 Codex</strong>
+            </div>
+            <p class="step-tip">刷新完成后，点击工具栏中的 <strong>播放 / 开始</strong> 按钮，即可用该 Agent Identity 账号直接启动 Codex，无需再浏览器 OAuth / 接码。</p>
+          </li>
+        </ol>
+
+        <ul class="step-list">
+          <li><code>auth.json</code> 含私钥，请勿上传到公开仓库或发给陌生人。</li>
+          <li>若导入失败，确认文件是本页生成的 <code>auth_mode: agent_identity</code> 格式，且 Cockpit 版本支持 Agent Identity。</li>
+          <li>仍可用传统方式：手动把文件放到 <code>~/.codex/auth.json</code> 后运行 <code>codex</code>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="howto muted-block">
+      <h2>原理（可选阅读）</h2>
+      <p class="muted">
+        有效 Session JWT → 本地 Ed25519 密钥对 →
+        <code>POST auth.openai.com/api/accounts/v1/agent/register</code> →
+        写出 <code>auth_mode: agent_identity</code>。
+        免的是 Codex OAuth 登录接码，不是「白号免短信注册」。
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span>
+        开源 · 纯静态 ·
+        <a id="siteLink" href="https://codex.lucoo.net/" target="_blank" rel="noopener">codex.lucoo.net</a>
+        ·
+        <a id="githubLink" href="https://github.com/JeremyPy/codex-agent-identity" target="_blank" rel="noopener">GitHub</a>
+      </span>
+      <a href="./LICENSE" class="muted">MIT License</a>
+    </footer>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
