@@ -569,7 +569,7 @@ async function generate() {
         : `\ntask: ${taskNote}`;
     setStatus(
       "ok",
-      `完成。请先点击「下载 auth.json」保存文件，再进入第 4 步用 Cockpit 导入。${warn}`
+      `完成。请先点击「下载 auth.json」保存文件，再进入第 4 步导入到 Cockpit API 服务。${warn}`
     );
     // Stay on step 3 so the user can download first; jump to step 4 only after download.
     focusStep(3);
@@ -609,7 +609,7 @@ function downloadAuth() {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
-  setStatus("ok", "已开始下载。请继续第 4 步：在 Cockpit 中从本地文件导入 auth.json");
+  setStatus("ok", "已开始下载。请继续第 4 步：导入到 API 服务并点击开始");
   focusStep(4);
 }
 
