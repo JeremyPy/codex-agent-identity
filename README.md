@@ -1,19 +1,19 @@
-# Codex 无需验证码 / 免短信登录 · Agent Identity 纯前端工具
+# Codex Agent Identity · 无需手机号登录 Codex
 
-**Codex 无需验证码 · Codex 免短信 · 跳过手机验证 · 免接码登录 Codex CLI / Cockpit**
+**无需手机号登录 Codex · 无需验证码 · 免短信 · 跳过手机验证 · 免接码登录 Codex CLI / Cockpit**
 
 在浏览器里把已登录的 ChatGPT **Session / accessToken** 转成 Codex 可用的 **`auth.json`（agent_identity）**，再导入 **Cockpit** 一键启动 Codex。  
-适合已经有 ChatGPT 登录态、但不想再走 Codex **OAuth 手机验证码 / 短信验证** 的场景。
+适合已经有 ChatGPT 登录态、但不想再走 Codex **OAuth 手机号 / 验证码 / 短信** 的场景。
 
 > 说明：免的是 **Codex 客户端 OAuth 接码**，不是「白号免短信注册 ChatGPT」。前提是账号本身已有有效 Session。
 
-- **Codex 无需验证码 / 免短信**：用现有 ChatGPT 会话生成 Agent Identity，避免再走官方登录接码
+- **无需手机号登录 Codex / 无需验证码 / 免短信**：用现有 ChatGPT 会话生成 Agent Identity，避免再走官方登录接码
 - **纯前端 · 无后端**：密钥用 Web Crypto 本地生成，Session 不经过第三方服务器
 - **只请求 OpenAI**：仅 `auth.openai.com` 注册 agent
 - **一键导入 Cockpit**：下载 `auth.json` → 本地文件导入 → 启动 Codex
 - **静态托管**：GitHub Pages / CDN，可自建
 
-关键词（便于搜索）：`Codex 无需验证码` `Codex 免短信` `Codex 跳过手机验证` `Codex 免接码` `ChatGPT Codex 登录` `agent_identity` `auth.json` `Cockpit 导入 Codex` `Session 转 auth.json` `Codex CLI 登录`
+关键词（便于搜索）：`Codex Agent Identity` `无需手机号登录 Codex` `Codex 无需验证码` `Codex 免短信` `Codex 跳过手机验证` `Codex 免接码` `ChatGPT Codex 登录` `agent_identity` `auth.json` `Cockpit 导入 Codex` `Session 转 auth.json` `Codex CLI 登录`
 
 > 逻辑对齐社区脚本「久雾 · codex_agent.py」：Session → Ed25519 → `agent/register` → `auth.json`。
 
