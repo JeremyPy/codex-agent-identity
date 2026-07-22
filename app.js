@@ -569,11 +569,10 @@ async function generate() {
         : `\ntask: ${taskNote}`;
     setStatus(
       "ok",
-      `完成。请点击「下载 auth.json」，然后按第 4 步用 Cockpit 导入并启动 Codex。${warn}`
+      `完成。请先点击「下载 auth.json」保存文件，再进入第 4 步用 Cockpit 导入。${warn}`
     );
-
-    // Guide user to step 4
-    setTimeout(() => focusStep(4), 400);
+    // Stay on step 3 so the user can download first; jump to step 4 only after download.
+    focusStep(3);
   } catch (err) {
     console.error(err);
     let msg = err?.message || String(err);
