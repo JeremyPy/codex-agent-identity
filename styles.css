@@ -575,14 +575,27 @@ a.btn {
   font-size: 0.82rem;
 }
 
-.badge.link-badge {
-  color: var(--accent);
-  border-color: rgba(91, 157, 255, 0.4);
+.badge.github-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: var(--text);
+  border-color: rgba(91, 157, 255, 0.35);
   text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
-.badge.link-badge:hover {
-  background: rgba(91, 157, 255, 0.12);
+.badge.github-badge:hover {
+  color: #fff;
+  border-color: rgba(91, 157, 255, 0.65);
+  background: rgba(91, 157, 255, 0.14);
+}
+
+.github-icon {
+  display: block;
 }
 
 .muted-block {
