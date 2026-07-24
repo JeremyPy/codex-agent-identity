@@ -197,6 +197,19 @@ code {
   margin-right: 0.35rem;
 }
 
+.notice-critical {
+  background: rgba(255, 107, 122, 0.12);
+  border: 1px solid rgba(255, 107, 122, 0.45);
+  color: #ffd0d5;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.notice-critical strong {
+  color: #ff8a96;
+  margin-right: 0.35rem;
+}
+
 /* Step cards */
 .step-card {
   background: rgba(18, 24, 32, 0.92);

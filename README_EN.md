@@ -2,8 +2,12 @@
 
 [中文](./README.md) | **English**
 
-**Login to Codex without phone · No SMS verification · Skip OAuth phone verification · No verification code for Codex CLI / Cockpit**
+> ⚠️ **Important notice (as of 2026-07-23)**  
+> This method **no longer works for new accounts**. Registration / generation may return **403** (and similar errors).  
+> **Accounts that were already authorized earlier (successfully generated and imported) are not affected.**  
+> Do not rely on this flow for new accounts.
 
+**Login to Codex without phone · No SMS verification · Skip OAuth phone verification · No verification code for Codex CLI / Cockpit**
 Browser-only tool that turns an existing ChatGPT **Session / accessToken** into a Codex **`auth.json` (`agent_identity`)**, then imports it into **Cockpit** and starts an API service / Codex.
 
 Use this when you already have a valid ChatGPT login in the browser, but do not want to go through Codex **OAuth phone / SMS / verification-code** again.

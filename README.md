@@ -2,13 +2,17 @@
 
 **中文** | [English](./README_EN.md)
 
+> ⚠️ **重要提醒（截止 2026-07-23）**  
+> 该方法**新账号已无法使用**，注册 / 生成时可能出现 **403** 等错误。  
+> **此前已完成授权（已生成并成功导入使用）的账号不受影响。**  
+> 请勿再对新账号依赖本流程。
+
 **无需手机号登录 Codex · 无需验证码 · 免短信 · 跳过手机验证 · 免接码登录 Codex CLI / Cockpit**
 
 在浏览器里把已登录的 ChatGPT **Session / accessToken** 转成 Codex 可用的 **`auth.json`（agent_identity）**，再导入 **Cockpit** 一键启动 Codex。  
 适合已经有 ChatGPT 登录态、但不想再走 Codex **OAuth 手机号 / 验证码 / 短信** 的场景。
 
 > 说明：免的是 **Codex 客户端 OAuth 接码**，不是「白号免短信注册 ChatGPT」。前提是账号本身已有有效 Session。
-
 - **无需手机号登录 Codex / 无需验证码 / 免短信**：用现有 ChatGPT 会话生成 Agent Identity，避免再走官方登录接码
 - **纯前端 · 无后端**：密钥用 Web Crypto 本地生成，Session 不经过第三方服务器
 - **只请求 OpenAI**：仅 `auth.openai.com` 注册 agent
